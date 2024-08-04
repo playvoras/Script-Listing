@@ -155,16 +155,22 @@ section:NewToggle("Instant Reload", "", function(q)
 end)
 
 section:NewButton("Fill Up Ammo", "", function()
-	pcall(function()
-		local oldpos = plr.Character.HumanoidRootPart.Position 
-		wait(.1)
-		plr.Character.HumanoidRootPart.CFrame =  game:GetService("Workspace").Maps["Chaos Facility"].Misc.Ammo.Box.Main.CFrame 
-		wait(.5)
-		fireproximityprompt(game:GetService("Workspace").Maps["Chaos Facility"].Misc.Ammo.Box.Main:FindFirstChild("Template"))
-		wait(.5)
-		plr.Character.HumanoidRootPart.CFrame = CFrame.new(oldpos)
-	end)
+    pcall(function()
+        local oldpos = plr.Character.HumanoidRootPart.Position 
+        local part = Instance.new("Part")
+        part.Size = Vector3.new(5, 1, 5)
+        part.Position = oldpos - Vector3.new(0, part.Size.Y / 2, 0)
+        part.Anchored = true
+        part.Parent = game.Workspace
+        wait(.1)
+        plr.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Maps["Chaos Facility"].Misc.Ammo.Box.Main.CFrame 
+        wait(.5)
+        fireproximityprompt(game:GetService("Workspace").Maps["Chaos Facility"].Misc.Ammo.Box.Main:FindFirstChild("Template"))
+        wait(.5)
+        plr.Character.HumanoidRootPart.CFrame = CFrame.new(oldpos)
+    end)
 end)
+
 
 section1:NewToggle("Enemy ESP", "", function(o)
 	oo = o 
