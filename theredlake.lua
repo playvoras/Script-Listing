@@ -1,3 +1,58 @@
+local function fireproximityprompt(pp)
+	assert(pp:IsA("ProximityPrompt"), "Argument must be a ProximityPrompt")
+
+	local hd = pp.HoldDuration
+	local mad = pp.MaxActivationDistance
+	local rlof = pp.RequiresLineOfSight
+	local cf = workspace.CurrentCamera.CFrame
+
+	local tr = false
+	local trcon = pp.Triggered:Connect(function()
+		tr = true
+	end)
+
+	pp.RequiresLineOfSight = false
+	pp.HoldDuration = 0
+	pp.MaxActivationDistance = math.huge
+
+	local function getPos(obj)
+		if not obj then return end
+		local function get(obj)
+			if obj:IsA("Model") or obj:IsA("BasePart") then return obj:GetPivot().Position end
+			if obj:IsA("Attachment") then return obj.WorldPosition end
+			return nil
+		end
+		local got = get(obj)
+		if not got then
+			got = get(obj:FindFirstAncestorOfClass("Model")) or get(obj:FindFirstAncestorOfClass("BasePart")) or get(obj:FindFirstAncestorOfClass("Attachment"))
+			if not got then return end
+		end
+		return got
+	end
+
+	local function fire()
+		pp:InputHoldBegin()
+		pp:InputHoldEnd()
+	end
+
+	fire()
+
+	if not tr then
+		local pos = getPos(pp.Parent) or (cf.Position + cf.LookVector)
+		workspace.CurrentCamera.CFrame = CFrame.lookAt(cf.Position, pos)
+		wait(2)
+		fire()
+		wait(1)
+		workspace.CurrentCamera.CFrame = cf
+	end
+
+	pp.RequiresLineOfSight = rlof
+	pp.HoldDuration = hd
+	pp.MaxActivationDistance = mad
+
+	trcon:Disconnect()
+end
+
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local window = library.CreateLib("Novaz#5792", "BloodTheme")
 local main = window:NewTab("Main")
