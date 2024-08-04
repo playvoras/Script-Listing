@@ -130,6 +130,11 @@ section:NewToggle("Kill Closest", "", function(a)
 					main:FireServer("DAMAGE", {closestEnemyHead, closestEnemyHead.Position, 0, false})
 				else
 					local oldpos = plr.Character.HumanoidRootPart.Position
+				        local part = Instance.new("Part")
+                                        part.Size = Vector3.new(5, 1, 5)
+                                        part.Position = oldpos - Vector3.new(0, part.Size.Y / 2, 0)
+                                        part.Anchored = true
+                                        part.Parent = game.Workspace
 					plr.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Maps["Chaos Facility"].Misc.Ammo.Box.Main.CFrame
 					task.wait(0.5)
 					fireproximityprompt(game:GetService("Workspace").Maps["Chaos Facility"].Misc.Ammo.Box.Main:FindFirstChild("Template"))
