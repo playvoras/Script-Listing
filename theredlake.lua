@@ -158,7 +158,7 @@ section:NewButton(
                     game:GetService("Workspace").Maps["Chaos Facility"].Misc.Ammo.Box.Main.CFrame
                 wait(.5)
                 fireproximityprompt(
-                    game:GetService("Workspace").Maps["Chaos Facility"].Misc.Ammo.Box.Main:FindFirstChild("Template")
+                    workspace.Maps.Classic.Interactable.AmmoBoxes.Main.Template:FindFirstChild("Template")
                 )
                 wait(.5)
                 plr.Character.HumanoidRootPart.CFrame = CFrame.new(oldpos)
