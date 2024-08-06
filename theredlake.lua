@@ -7,6 +7,18 @@ local main1 = window:NewTab("Misc")
 local section2 = main1:NewSection("Local Player")
 local plr = game.Players.LocalPlayer
 
+for i, v in ipairs(game.Workspace:GetDescendants()) do
+    if v:IsA("ProximityPrompt") then
+        v.HoldDuration = 0
+    end
+end
+
+game.Workspace.DescendantAdded:Connect(function(descendant)
+    if descendant:IsA("ProximityPrompt") then
+        descendant.HoldDuration = 0
+    end
+end)
+
 local function getclosestenemy() 
     local closest = nil 
     local maxdist = math.huge
