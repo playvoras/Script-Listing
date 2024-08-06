@@ -155,8 +155,7 @@ section:NewButton(
                 local oldpos = plr.Character.HumanoidRootPart.Position
                 wait(.1)
                 local path = workspace.Maps.Classic.Interactable.AmmoBoxes.Main
-                plr.Character.HumanoidRootPart.CFrame =
-                    path.CFrame
+                path.CFrame = plr.Character.HumanoidRootPart.CFrame
                 wait(.5)
                 fireproximityprompt(
                     path.Template
