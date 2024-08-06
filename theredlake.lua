@@ -154,11 +154,12 @@ section:NewButton(
             function()
                 local oldpos = plr.Character.HumanoidRootPart.Position
                 wait(.1)
+                local path = workspace.Maps.Classic.Interactable.AmmoBoxes.Main
                 plr.Character.HumanoidRootPart.CFrame =
-                    game:GetService("Workspace").Maps["Chaos Facility"].Misc.Ammo.Box.Main.CFrame
+                    path.CFrame
                 wait(.5)
                 fireproximityprompt(
-                    workspace.Maps.Classic.Interactable.AmmoBoxes.Main.Template:FindFirstChild("Template")
+                    path.Template
                 )
                 wait(.5)
                 plr.Character.HumanoidRootPart.CFrame = CFrame.new(oldpos)
