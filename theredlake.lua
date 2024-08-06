@@ -151,15 +151,7 @@ section:NewButton(
     "",
     function()
         pcall(function()
-            local plr = game.Players.LocalPlayer
-            local oldpos = plr.Character.HumanoidRootPart.Position
-            wait(0.1)
-            local path = workspace.Maps.Classic.Interactable.AmmoBoxes.Main
-            path.CFrame = plr.Character.HumanoidRootPart.CFrame
-            wait(0.5)
-            fireproximityprompt(path.Template)
-            wait(0.5)
-            plr.Character.HumanoidRootPart.CFrame = CFrame.new(oldpos)
+            fireproximityprompt(workspace.Maps.Classic.Interactable.AmmoBoxes.Box.Main.Template)
         end)
     end
 )
