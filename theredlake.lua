@@ -150,20 +150,17 @@ section:NewButton(
     "Fill Up Ammo",
     "",
     function()
-        pcall(
-            function()
-                local oldpos = plr.Character.HumanoidRootPart.Position
-                wait(.1)
-                local path = workspace.Maps.Classic.Interactable.AmmoBoxes.Main
-                path.CFrame = plr.Character.HumanoidRootPart.CFrame
-                wait(.5)
-                fireproximityprompt(
-                    path.Template
-                )
-                wait(.5)
-                plr.Character.HumanoidRootPart.CFrame = CFrame.new(oldpos)
-            end
-        )
+        pcall(function()
+            local plr = game.Players.LocalPlayer
+            local oldpos = plr.Character.HumanoidRootPart.Position
+            wait(0.1)
+            local path = workspace.Maps.Classic.Interactable.AmmoBoxes.Main
+            path.CFrame = plr.Character.HumanoidRootPart.CFrame
+            wait(0.5)
+            fireproximityprompt(path.Template)
+            wait(0.5)
+            plr.Character.HumanoidRootPart.CFrame = CFrame.new(oldpos)
+        end)
     end
 )
 
