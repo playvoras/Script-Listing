@@ -2,8 +2,8 @@ local relief = loadstring(game:HttpGet("https://raw.githubusercontent.com/PeaPat
 relief.addCategory("Player", "rbxassetid://16149111731")
 
 local Config = {
-	earlyChest = false,
-	instantClaim = true,--dont use with earlyChest
+	earlyChest = true,
+	instantClaim = false,--dont use with earlyChest
 	tpDelay = 2.05,
 	restartDelay = 4.85,
 	stageToTouchChest = 3,
