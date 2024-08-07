@@ -30,32 +30,23 @@ game.Workspace.DescendantAdded:Connect(
 	end
 )
 
-local function getclosestenemy()
-	local closestHead = nil
-	local maxdist = math.huge
-
-	for _, descendant in pairs(game.Workspace.NPCs:GetDescendants()) do
-		if descendant:IsA("Model") and descendant:FindFirstChild("Head") then
-			local head = descendant:FindFirstChild("Head")
-			local magnitude = (head.Position - plr.Character.HumanoidRootPart.Position).Magnitude
-			if magnitude < maxdist then
-				closestHead = head
-				maxdist = magnitude
-			end
-		end
-	end
-
-	if closestHead then
-		local path = ""
-		local current = closestHead
-		while current and current.Parent do
-			path = current.Name .. "/" .. path
-			current = current.Parent
-		end
-		print("Closest head path: " .. path)
-	end
-
-	return closestHead
+local function getclosestenemy() 
+    local closest = nil 
+    local maxdist = math.huge
+    for i,v in pairs(game.Workspace.NPCs:GetChildren()) do 
+        if v.Name == "Tango" or v.Name == "Monsters" then 
+            for o,k in pairs(v:GetChildren()) do 
+                if k:IsA("Model") and k:FindFirstChild("HumanoidRootPart") then 
+                    local magnitude = (k:FindFirstChild("HumanoidRootPart").Position - plr.Character.HumanoidRootPart.Position).Magnitude 
+                    if magnitude < maxdist then 
+                        closest = k
+                        maxdist = magnitude 
+                    end 
+                end 
+            end 
+        end 
+    end 
+    return closest
 end
 
 
