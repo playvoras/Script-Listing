@@ -13,6 +13,7 @@ part.Size = Vector3.new(4, 1, 4)
 part.CFrame = targetcframe
 part.Anchored = true
 part.Parent = workspace
+part.Transparency = 1
 local plr = game.Players.LocalPlayer
 
 for i, v in ipairs(game.Workspace:GetDescendants()) do
