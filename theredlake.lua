@@ -21,11 +21,6 @@ game.Workspace.DescendantAdded:Connect(
     end
 )
 
-game:GetService("RunService").Heartbeat:Connect(function()
-    game.Players.LocalPlayer.Character:SetAttribute("Mana", math.huge)
-end)
-
-
 local function getclosestenemy()
     local closest = nil
     local maxdist = math.huge
