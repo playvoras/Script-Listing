@@ -33,20 +33,18 @@ game.Workspace.DescendantAdded:Connect(
 local function getclosestenemy()
 	local closest = nil
 	local maxdist = math.huge
-	for i, v in pairs(game.Workspace.NPCs:GetChildren()) do
-		if v.Name == "Tango" or v.Name == "Monsters" then
-			for o, k in pairs(v:GetChildren()) do
-				if k:IsA("Model") and k:FindFirstChild("HumanoidRootPart") then
-					local magnitude =
-						(k:FindFirstChild("HumanoidRootPart").Position - plr.Character.HumanoidRootPart.Position).Magnitude
-					if magnitude < maxdist then
-						closest = k
-						maxdist = magnitude
-					end
-				end
+	
+	for _, descendant in pairs(game.Workspace.NPCs:GetDescendants()) do
+		if descendant:IsA("Model") and descendant:FindFirstChild("HumanoidRootPart") then
+			local magnitude =
+				(descendant:FindFirstChild("HumanoidRootPart").Position - plr.Character.HumanoidRootPart.Position).Magnitude
+			if magnitude < maxdist then
+				closest = descendant
+				maxdist = magnitude
 			end
 		end
 	end
+	
 	return closest
 end
 
