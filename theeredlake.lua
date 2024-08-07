@@ -1,0 +1,458 @@
+local new = Instance.new("Part", workspace)
+new.Name = "tppart"
+new.Size = Vector3.new(150, 10, 150)
+new.Anchored = true
+local vu = game:GetService("VirtualUser")
+game:GetService("Players").LocalPlayer.Idled:connect(
+    function()
+        vu:Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+        wait(1)
+        vu:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+    end
+)
+Instance.new("CFrameValue", game.Players.LocalPlayer).Name = "tpb"
+local library = loadstring(game:HttpGet("https://pastebin.com/raw/PpMcEF8z", true))()
+local example =
+    library:CreateWindow(
+    {
+        text = "SCP: The Red Lake"
+    }
+)
+if _G.test ~= true then
+    spawn(
+        function()
+            while wait() do
+                task.wait()
+                pcall(
+                    function()
+                        if
+                            game.Players.LocalPlayer.Backpack:FindFirstChild(
+                                game.Players.LocalPlayer:FindFirstChild("MyGun").Value
+                            )
+                         then
+                            _G.guntouse =
+                                game.Players.LocalPlayer.Backpack:FindFirstChild(
+                                game.Players.LocalPlayer:FindFirstChild("MyGun").Value
+                            )
+                        elseif
+                            game.Players.LocalPlayer.Character:FindFirstChild(
+                                game.Players.LocalPlayer:FindFirstChild("MyGun").Value
+                            )
+                         then
+                            _G.guntouse =
+                                game.Players.LocalPlayer.Character:FindFirstChild(
+                                game.Players.LocalPlayer:FindFirstChild("MyGun").Value
+                            )
+                        end
+                    end
+                )
+            end
+        end
+    )
+    spawn(
+        function()
+            while wait() do
+                pcall(
+                    function()
+                        if _G.autofarm == true then
+                            if
+                                not game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and
+                                    workspace:FindFirstChild(game.Players.LocalPlayer.Name)
+                             then
+                                wait(1)
+                                game.Players.LocalPlayer.Character.Humanoid:EquipTool(
+                                    game.Players.LocalPlayer.Backpack[
+                                        game.Players.LocalPlayer:FindFirstChild("MyGun").Value
+                                    ]
+                                )
+                            end
+                        end
+                    end
+                )
+            end
+        end
+    )
+    _G.test = true
+end
+spawn(
+    function()
+        while wait() do
+            pcall(
+                function()
+                    if _G.autofarm == true then
+                        if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") then
+                            wait()
+                            game.Players.LocalPlayer:FindFirstChild("MyGun").Value =
+                                game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name
+                        end
+                    end
+                end
+            )
+        end
+    end
+)
+spawn(
+    function()
+        while wait() do
+            pcall(
+                function()
+                    if _G.autofarm == true then
+                        wait()
+                        if
+                            game.Players.LocalPlayer:FindFirstChild("MyGun").Value ~= "" and
+                                workspace:FindFirstChild(game.Players.LocalPlayer.Name) and
+                                not game.Players.LocalPlayer.Backpack:FindFirstChild(
+                                    game.Players.LocalPlayer:FindFirstChild("MyGun").Value
+                                ) and
+                                not game.Players.LocalPlayer.Character:FindFirstChild(
+                                    game.Players.LocalPlayer:FindFirstChild("MyGun").Value
+                                )
+                         then
+                            wait(1)
+                            game.Players.LocalPlayer.Character:BreakJoints()
+                            wait(3)
+                        end
+                    end
+                end
+            )
+        end
+    end
+)
+spawn(
+    function()
+        while wait() do
+            pcall(
+                function()
+                    if
+                        game.Players.LocalPlayer:FindFirstChild("MyGun").Value ~= "" and
+                            game.Players.LocalPlayer:FindFirstChild("MyGun").Value ~= "G18" and
+                            game.Players.LocalPlayer:FindFirstChild("G18")
+                     then
+                        wait()
+                        game.Players.LocalPlayer.Character.Humanoid:EquipTool(
+                            game.Players.LocalPlayer:FindFirstChild("G18")
+                        )
+                        game.Players.LocalPlayer:FindFirstChild("MyGun").Value = "G18"
+                    end
+                end
+            )
+        end
+    end
+)
+example:AddToggle(
+    "Auto Farm Mobs",
+    function(state)
+        _G.autofarm = (state and true or false)
+        if _G.autofarm == false then
+            wait(0.5)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                game.Players.LocalPlayer:FindFirstChild("tpb").Value
+        else
+            game.Players.LocalPlayer:FindFirstChild("tpb").Value =
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+
+            while _G.autofarm do
+                wait()
+                pcall(
+                    function()
+                        if not game.Players.LocalPlayer:FindFirstChild("MyGun") then
+                            if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") then
+                                Instance.new("StringValue", game.Players.LocalPlayer).Name = "MyGun"
+                                wait()
+                                game.Players.LocalPlayer:FindFirstChild("MyGun").Value =
+                                    game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name
+                            else
+                                local CoreGui = game:GetService("StarterGui")
+
+                                CoreGui:SetCore(
+                                    "SendNotification",
+                                    {
+                                        Title = "Yo dude",
+                                        Text = "PLS EQUIP A GUN FIRST",
+                                        Duration = 5
+                                    }
+                                )
+                            end
+
+                            game:GetService("ReplicatedStorage").Remotes.PopupClient:Fire(
+                                "How to Use Auto Farm Mobs",
+                                '<font color="rgb(85, 255, 0)">Equip A Gun</font>'
+                            )
+                            wait(5)
+                        end
+
+                        for i, v in pairs(game:GetService("Workspace").NPCs:GetDescendants()) do
+                            if
+                                v.Name == "Head" and v.Parent.Parent.Name == "Tango" and
+                                    game.Players.LocalPlayer:FindFirstChild("MyGun") or
+                                    v.Name == "Head" and v.Parent.Parent.Name == "Monsters" and
+                                        game.Players.LocalPlayer:FindFirstChild("MyGun")
+                             then
+                                if
+                                    game.Players.LocalPlayer:DistanceFromCharacter(v.Position) >=
+                                        _G.guntouse:GetAttribute("Range")
+                                 then
+                                    firetouchinterest(
+                                        game.Players.LocalPlayer.Character.HumanoidRootPart,
+                                        game:GetService("Workspace").Buildings.SpawnArena.Teleports.Battlefield.Exit,
+                                        0
+                                    )
+                                    firetouchinterest(
+                                        game.Players.LocalPlayer.Character.HumanoidRootPart,
+                                        game:GetService("Workspace").Buildings.SpawnArena.Teleports.Battlefield.Exit,
+                                        1
+                                    )
+                                    wait(0.2)
+                                    workspace.tppart.CFrame =
+                                        CFrame.new(v.Position.X, v.Position.Y, v.Position.Z) - Vector3.new(0, 100, 0)
+                                    game.Players.LocalPlayer.Character:MoveTo(workspace.tppart.Position)
+                                else
+                                    repeat
+                                        wait()
+                                        if v.Parent ~= nil then
+                                            game:GetService("ReplicatedStorage").BulletReplication.ReplicateClient:Fire(
+                                                "MUZZLE",
+                                                game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass(
+                                                    "Tool"
+                                                ).Handle.Barrel
+                                            )
+                                            game:GetService("ReplicatedStorage").BulletReplication.ReplicateClient:Fire(
+                                                "HIT",
+                                                game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass(
+                                                    "Tool"
+                                                ).Handle.Barrel,
+                                                {[1] = v.Position, [3] = false, [4] = "Plastic"}
+                                            )
+                                            game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass(
+                                                "Tool"
+                                            ).Main:FireServer(
+                                                "MUZZLE",
+                                                game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass(
+                                                    "Tool"
+                                                ).Handle.Barrel
+                                            )
+                                            game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass(
+                                                "Tool"
+                                            ).Main:FireServer("DAMAGE", {[1] = v, [2] = v.Position, [3] = 10})
+                                            game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass(
+                                                "Tool"
+                                            ).Main:FireServer("AMMO")
+                                        end
+                                    until game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool"):GetAttribute(
+                                        "TotalAmmo"
+                                    ) < 1 or
+                                        v.Parent.Humanoid.Health.Parent == nil or
+                                        v.Parent.Humanoid.Health == 0 or
+                                        _G.test == false or
+                                        game.Players.LocalPlayer:DistanceFromCharacter(v.Position) >=
+                                            _G.guntouse:GetAttribute("Range")
+                                    wait(0.2)
+                                    if
+                                        game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool"):GetAttribute(
+                                            "TotalAmmo"
+                                        ) < 1
+                                     then
+                                        for i, v in pairs(
+                                            game:GetService("Workspace").Maps.Classic.Interactable.AmmoBoxes:GetDescendants(
+
+                                            )
+                                        ) do
+                                            if
+                                                v.ClassName == "ProximityPrompt" and
+                                                    game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool"):GetAttribute(
+                                                        "TotalAmmo"
+                                                    ) < 1
+                                             then
+                                                repeat
+                                                    wait(0.5)
+                                                    workspace.tppart.CFrame =
+                                                        CFrame.new(
+                                                        v.Parent.Position.X,
+                                                        v.Parent.Position.Y,
+                                                        v.Parent.Position.Z
+                                                    ) - Vector3.new(0, 10, 0)
+                                                    game.Players.LocalPlayer.Character:MoveTo(workspace.tppart.Position)
+                                                    wait(0.2)
+                                                    fireproximityprompt(v)
+                                                until game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool"):GetAttribute(
+                                                    "TotalAmmo"
+                                                ) > 1
+                                            end
+                                        end
+                                        warn("ok")
+                                        firetouchinterest(
+                                            game.Players.LocalPlayer.Character.HumanoidRootPart,
+                                            game:GetService("Workspace").Buildings.SpawnArena.Teleports.Battlefield.Exit,
+                                            0
+                                        )
+                                        firetouchinterest(
+                                            game.Players.LocalPlayer.Character.HumanoidRootPart,
+                                            game:GetService("Workspace").Buildings.SpawnArena.Teleports.Battlefield.Exit,
+                                            1
+                                        )
+                                    end
+                                end
+                            end
+                        end
+                    end
+                )
+            end
+        end
+    end
+)
+example:AddToggle(
+    "Auto Loot Mobs",
+    function(state)
+        _G.loot = (state and true or false)
+        if _G.loot == false then
+            wait(0.5)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                game.Players.LocalPlayer:FindFirstChild("tpb").Value
+        else
+            while _G.loot do
+                wait()
+                pcall(
+                    function()
+                        for i, v in pairs(game:GetService("Workspace").NPCs.Deceased:GetDescendants()) do
+                            if
+                                v.ClassName == "ProximityPrompt" and
+                                    not game:GetService("Workspace").NPCs.Monsters:FindFirstChildOfClass("Model")
+                             then
+                                workspace.tppart.CFrame =
+                                    CFrame.new(v.Position.X, v.Position.Y, v.Position.Z) - Vector3.new(0, 10, 0)
+                                game.Players.LocalPlayer.Character:MoveTo(workspace.tppart.Position)
+                                task.wait(0.5)
+                                fireproximityprompt(v)
+                            end
+                        end
+                    end
+                )
+            end
+        end
+    end
+)
+example:AddToggle(
+    "Auto Heal",
+    function(state)
+        _G.healer = (state and true or false)
+        while _G.healer do
+            wait()
+            pcall(
+                function()
+                    if game.Players.LocalPlayer.Character.Humanoid.Health < 70 then
+                        for i, v in pairs(game:GetService("Workspace").Maps:GetDescendants()) do
+                            if
+                                v.Name == "Enter" and v.Parent.Name == "Teleports" and
+                                    game.Players.LocalPlayer.Character.Humanoid.Health < 70
+                             then
+                                firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v, 0)
+                                firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v, 1)
+                                wait(5)
+                                firetouchinterest(
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart,
+                                    game:GetService("Workspace").Buildings.SpawnArena.Teleports.Battlefield.Exit,
+                                    0
+                                )
+                                firetouchinterest(
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart,
+                                    game:GetService("Workspace").Buildings.SpawnArena.Teleports.Battlefield.Exit,
+                                    1
+                                )
+                            end
+                        end
+                    end
+                end
+            )
+        end
+    end
+)
+local example =
+    library:CreateWindow(
+    {
+        text = "Auto Buy Weapon"
+    }
+)
+
+example:AddBox(
+    "Weapon Name",
+    function(object, focus)
+        if focus then
+            _G.weapon = tostring(object.Text)
+        end
+    end
+)
+example:AddToggle(
+    "Auto Buy Weapon",
+    function(state)
+        _G.gunbuyer = (state and true or false)
+        while _G.gunbuyer do
+            wait()
+            pcall(
+                function()
+                    for i, v in pairs(game:GetService("Workspace").NPCs:GetDescendants()) do
+                        if
+                            v.Name == "Head" and v.Parent.Parent.Name == "Tango" or
+                                v.Name == "Head" and v.Parent.Parent.Name == "Monsters"
+                         then
+                            _G.Monster = v
+                        end
+                    end
+                    if _G.Monster == nil then
+                        _G.weapon = "AK47"
+                        local test =
+                            game:GetService("Players").LocalPlayer.PlayerGui.GameMain.LeftCorner.MoneyBar.MoneyLabel.Text:split(
+                            " "
+                        )
+                        for i, v in pairs(require(game:GetService("ReplicatedStorage").PublicModules.WeaponShop)) do
+                            if
+                                i == _G.weapon and _G.weapon ~= game.Players.LocalPlayer:FindFirstChild("MyGun").Value and
+                                    v.Price <= tonumber(test[1])
+                             then
+                                _G.Monster = nil
+                                for a, b in pairs(game:GetService("Workspace").Maps:GetDescendants()) do
+                                    if b.Name == "Enter" and b.Parent.Name == "Teleports" then
+                                        _G.teleporter = b
+                                    end
+                                end
+                                firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, _G.teleporter, 0)
+                                firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, _G.teleporter, 1)
+                                wait(2)
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                                    workspace.WeaponShops.Normal.CFrame
+                                wait(1)
+                                game:GetService("ReplicatedStorage").Remotes.BuyWeapon:FireServer(
+                                    i,
+                                    workspace.WeaponShops.Normal
+                                )
+                                wait(1)
+                                firetouchinterest(
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart,
+                                    game:GetService("Workspace").Buildings.SpawnArena.Teleports.Battlefield.Exit,
+                                    0
+                                )
+                                firetouchinterest(
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart,
+                                    game:GetService("Workspace").Buildings.SpawnArena.Teleports.Battlefield.Exit,
+                                    1
+                                )
+                                game.Players.LocalPlayer:FindFirstChild("MyGun").Value =
+                                    game.Players.LocalPlayer.Backpack[i].Name
+                            end
+                        end
+                    end
+                end
+            )
+        end
+    end
+)
+local example =
+    library:CreateWindow(
+    {
+        text = "Credits"
+    }
+)
+example:AddLabel(
+    "MARCO POLO#3842",
+    function()
+    end
+)
