@@ -45,6 +45,16 @@ local function getclosestenemy()
 		end
 	end
 	
+	if closest then
+		local path = ""
+		local current = closest
+		while current and current.Parent do
+			path = current.Name .. "/" .. path
+			current = current.Parent
+		end
+		print("Closest enemy path: " .. path)
+	end
+	
 	return closest
 end
 
