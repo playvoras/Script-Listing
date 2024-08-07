@@ -31,32 +31,33 @@ game.Workspace.DescendantAdded:Connect(
 )
 
 local function getclosestenemy()
-	local closest = nil
+	local closestHead = nil
 	local maxdist = math.huge
-	
+
 	for _, descendant in pairs(game.Workspace.NPCs:GetDescendants()) do
-		if descendant:IsA("Model") and descendant:FindFirstChild("HumanoidRootPart") then
-			local magnitude =
-				(descendant:FindFirstChild("HumanoidRootPart").Position - plr.Character.HumanoidRootPart.Position).Magnitude
+		if descendant:IsA("Model") and descendant:FindFirstChild("Head") then
+			local head = descendant:FindFirstChild("Head")
+			local magnitude = (head.Position - plr.Character.HumanoidRootPart.Position).Magnitude
 			if magnitude < maxdist then
-				closest = descendant
+				closestHead = head
 				maxdist = magnitude
 			end
 		end
 	end
-	
-	if closest then
+
+	if closestHead then
 		local path = ""
-		local current = closest
+		local current = closestHead
 		while current and current.Parent do
 			path = current.Name .. "/" .. path
 			current = current.Parent
 		end
-		print("Closest enemy path: " .. path)
+		print("Closest head path: " .. path)
 	end
-	
-	return closest
+
+	return closestHead
 end
+
 
 local function getammo(pp)
 	local oldpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
