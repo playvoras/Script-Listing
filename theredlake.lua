@@ -54,11 +54,11 @@ local function getammo(pp)
 	local oldpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
 	pps.HoldDuration = 0
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = targetcframe
-	task.wait(0.5)
+	task.wait(.1)
 	pp:InputHoldBegin()
-	task.wait(0.5)
+	task.wait(.1)
 	pp:InputHoldEnd()
-	task.wait(.001)
+	task.wait(.1)
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = oldpos
 end
 
