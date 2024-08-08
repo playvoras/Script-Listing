@@ -127,7 +127,7 @@ section:NewToggle(
 						{
 							getclosestenemy():FindFirstChild("Head"),
 							getclosestenemy():FindFirstChild("Head").Position,
-							0,
+							43,
 							false
 						}
 						)
